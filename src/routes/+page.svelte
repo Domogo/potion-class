@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Potion from '$lib/components/Potion.svelte';
+
+	// could have used bindings instead, but got nervous and went with stores. leaving as is.
 	import { played, success } from '$lib/stores/store';
 	import { getGuessingIngredients, getPotion } from '$lib/util/util';
 
