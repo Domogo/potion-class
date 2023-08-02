@@ -14,6 +14,8 @@ copy envexample to .env.local
 - Improve UX of picking ingredients. Allow user to toggle selected ingredient, don't let user select more/less than the required amount before submitting his answer
 - Perform ingredient checking on backend and hide potion ingredients from the user to avoid cheating
 - Introduce potion difficulty so that the user can choose the difficulty of the potion they want to make
+- remove tailwind
+- remove typescript, use JSDoc
 
 ## V1
 
