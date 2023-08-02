@@ -8,10 +8,23 @@ type Ingredient = {
 };
 
 export const load = (async () => {
-	const response = await axios.get<Ingredient[]>(`${WIZARD_WORLD_API}/Ingredients`);
-	const ingredients = response.data;
+	const ingredientsResponse = await axios.get<Ingredient[]>(`${WIZARD_WORLD_API}/Ingredients`);
+	const ingredients = ingredientsResponse.data;
+
+	// --
+	const potionsResponse = await axios.get(`${WIZARD_WORLD_API}/Elixirs`);
+
+	const potions = potionsResponse.data.filter((potion) => potion.ingredients.length !== 0);
+
+	const potionCount = potions.length;
+
+	// a random potion
+	const randPotionIndex = Math.floor(Math.random() * potionCount);
+
+	const potion = potions[randPotionIndex];
 
 	return {
-		ingredients
+		ingredients,
+		potion
 	};
 }) satisfies LayoutServerLoad;
