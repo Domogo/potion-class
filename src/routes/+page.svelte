@@ -1,30 +1,58 @@
 <script lang="ts">
+	import Potion from '$lib/components/Potion.svelte';
+	import { played, success } from '$lib/components/stores/store.js';
+
 	export let data;
-	let { potion, ingredients } = data;
+	let { potions, ingredients } = data;
+	const potionCount = potions.length;
 
-	const filteredIngredients = ingredients.filter((arr) => !potion.ingredients.includes(arr));
+	const getPotion = () => {
+		const randPotionIndex = Math.floor(Math.random() * potionCount);
+		return potions[randPotionIndex];
+	};
 
-	const randIndex = Math.floor(
-		Math.random() * (filteredIngredients.length - potion.ingredients.length)
-	);
+	const getGuessingIngredients = (potion: any, ingredients: any) => {
+		// @ts-ignore
+		const filteredIngredients = ingredients.filter((arr) => !potion.ingredients.includes(arr));
 
-	const fakeIngredients = filteredIngredients.slice(
-		randIndex,
-		randIndex + potion.ingredients.length
-	);
+		const randIndex = Math.floor(
+			Math.random() * (filteredIngredients.length - potion.ingredients.length)
+		);
 
-	const guessingIngredients = [...potion.ingredients, ...fakeIngredients];
+		const fakeIngredients = filteredIngredients.slice(
+			randIndex,
+			randIndex + potion.ingredients.length
+		);
+		let guessingIngredients = [...potion.ingredients, ...fakeIngredients];
+
+		return guessingIngredients;
+	};
+
+	let potion = getPotion();
+
+	let guessingIngredients = getGuessingIngredients(potion, ingredients);
+
+	const reassignPotion = () => {
+		potion = getPotion();
+		guessingIngredients = getGuessingIngredients(potion, ingredients);
+		$played = false;
+		$success = false;
+	};
 </script>
 
 <div>
-	<h1>Guess the ingredients for: {potion.name}</h1>
-	<p>There are {potion.ingredients.length} ingredients in this potion.</p>
+	<Potion {potion} {guessingIngredients} />
 
-	<div class="ingredients-wrapper">
-		{#each guessingIngredients as ingredient}
-			<div class="ingredient">
-				{ingredient.name}
-			</div>
-		{/each}
-	</div>
+	{#if $played}
+		<p>{$success ? "Hmmm.. So you're not a complete idiot." : 'How disappointing.'}</p>
+		<button class="secondary-button" on:click={reassignPotion}>Try again</button>
+	{/if}
 </div>
+
+<style>
+	.secondary-button {
+		border: 1px solid black;
+		padding: 16px;
+		background-color: darkseagreen;
+	}
+</style>

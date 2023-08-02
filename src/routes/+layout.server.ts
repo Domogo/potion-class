@@ -16,15 +16,8 @@ export const load = (async () => {
 
 	const potions = potionsResponse.data.filter((potion) => potion.ingredients.length !== 0);
 
-	const potionCount = potions.length;
-
-	// a random potion
-	const randPotionIndex = Math.floor(Math.random() * potionCount);
-
-	const potion = potions[randPotionIndex];
-
 	return {
 		ingredients,
-		potion
+		potions
 	};
 }) satisfies LayoutServerLoad;
