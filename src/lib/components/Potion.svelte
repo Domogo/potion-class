@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { played, success } from './stores/store';
+	import { played, success } from '$lib/stores/store';
 
 	export let potion: any;
 	export let guessingIngredients: any;
@@ -33,9 +33,8 @@
 				{ingredient.name}
 			</button>
 		{/each}
-
-		<button class="submit-button" on:click={checkAnswer}>Check your answer</button>
 	</div>
+	<button class="submit-button" on:click={checkAnswer}>Check your answer</button>
 </div>
 
 <style>
@@ -44,7 +43,6 @@
 		padding: 16px;
 		background-color: #437c90;
 	}
-
 	.selected {
 		background-color: burlywood;
 	}

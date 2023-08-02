@@ -1,39 +1,16 @@
 <script lang="ts">
 	import Potion from '$lib/components/Potion.svelte';
-	import { played, success } from '$lib/components/stores/store.js';
+	import { played, success } from '$lib/stores/store';
+	import { getGuessingIngredients, getPotion } from '$lib/util/util';
 
 	export let data;
 	let { potions, ingredients } = data;
-	const potionCount = potions.length;
 
-	const getPotion = () => {
-		const randPotionIndex = Math.floor(Math.random() * potionCount);
-		return potions[randPotionIndex];
-	};
-
-	const getGuessingIngredients = (potion: any, ingredients: any) => {
-		// @ts-ignore
-		const filteredIngredients = ingredients.filter((arr) => !potion.ingredients.includes(arr));
-
-		const randIndex = Math.floor(
-			Math.random() * (filteredIngredients.length - potion.ingredients.length)
-		);
-
-		const fakeIngredients = filteredIngredients.slice(
-			randIndex,
-			randIndex + potion.ingredients.length
-		);
-		let guessingIngredients = [...potion.ingredients, ...fakeIngredients];
-
-		return guessingIngredients;
-	};
-
-	let potion = getPotion();
-
+	let potion = getPotion(potions);
 	let guessingIngredients = getGuessingIngredients(potion, ingredients);
 
 	const reassignPotion = () => {
-		potion = getPotion();
+		potion = getPotion(potions);
 		guessingIngredients = getGuessingIngredients(potion, ingredients);
 		$played = false;
 		$success = false;

@@ -1,38 +1,28 @@
-# create-svelte
+# potion-class
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Run
 
-## Creating a project
+copy envexample to .env.local
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+```
+  pnpm i
+  pnpm dev
 ```
 
-## Developing
+## TODO: MVP
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- Improve UX of picking ingredients. Allow user to toggle selected ingredient, don't let user select more/less than the required amount before submitting his answer
+- Perform ingredient checking on backend and hide potion ingredients from the user to avoid cheating
+- Introduce potion difficulty so that the user can choose the difficulty of the potion they want to make
 
-```bash
-npm run dev
+## V1
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- Add auth layer so players can have profile displaying their play history
+- Create leaderboards
+- Improve UI to match the Harry Potter vibes
+- Motion and animation. Have a 3D model of a student spinning the potion in the goblet with both success and failure animations.
 
-## Building
+## V2
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- introduce history / wizard lore class
+- introduce Duelling using the spells endpoint. Allow users to battle each other

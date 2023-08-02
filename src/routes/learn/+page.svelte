@@ -1,6 +1,9 @@
 <script>
+	import { getPotion } from '$lib/util/util';
+
 	export let data;
-	let potion = data.potion;
+	const potions = data.potions;
+	const potion = getPotion(potions);
 </script>
 
 <div>
